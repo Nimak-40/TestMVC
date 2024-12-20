@@ -6,7 +6,7 @@ using Shop.Models.Repositories;
 
 namespace Shop.Models.Services
 {
-    public class CategoryService :ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepo _CategoryRepo;
 
@@ -19,6 +19,17 @@ namespace Shop.Models.Services
 
             var resualt = _CategoryRepo.GetAllCategories();
             return resualt;
+        }
+        public void SetCategory(string categoryName, string description)
+        {
+
+            var category = new Category
+            {
+                Name = categoryName,
+                Description = description
+            };
+            _CategoryRepo.SetCategory(category);
+
         }
     }
 }

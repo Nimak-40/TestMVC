@@ -6,6 +6,7 @@ namespace Shop.Models.Contracts.RepositoriyContracts
     public interface ICategoryRepo
     {
         public List<Category> GetAllCategories();
+        public void SetCategory(Category category);
 
     }
 }

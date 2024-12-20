@@ -20,6 +20,11 @@ namespace Shop.Models.Repositories
             return _context.Categorys.AsNoTracking().ToList();
                 
         }
+        public void SetCategory(Category category)
+        {
+            _context.Categorys.Add(category);
+            _context.SaveChanges();
+        }
     }
 
 }
