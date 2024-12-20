@@ -1,0 +1,29 @@
+﻿@using Shop.Models.Entities
+@model List<Product>
+@{
+
+}
+
+<h1>Products List</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Category.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
