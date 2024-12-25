@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post" asp-controller="User" asp-action="UserLogin">
+    <div class="form-floating mb-3">
+        <input class="form-control" name="email" type="text" placeholder="email" data-sb-validations="" />
+        <label for="email">email</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" name="password" type="text" placeholder="password" data-sb-validations="" />
+        <label for="password">password</label>
+    </div>
+    <div class="d-grid">
+        <button class="btn btn-primary btn-lg " id="submitButton" type="submit">Submit</button>
+    </div>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color: red;">@ViewBag.Error</p>
+}

@@ -11,7 +11,7 @@ using Shop.Models.Infrustructure;
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241220062600_init")]
+    [Migration("20241225075447_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -91,9 +91,14 @@ namespace Shop.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
 
@@ -104,7 +109,8 @@ namespace Shop.Migrations
                             CategoryId = 1,
                             Description = "لپ‌تاپ حرفه‌ای",
                             Name = "Laptop",
-                            Price = 1500.00m
+                            Price = 1500.00m,
+                            UserId = 1
                         },
                         new
                         {
@@ -112,7 +118,8 @@ namespace Shop.Migrations
                             CategoryId = 1,
                             Description = "گوشی هوشمند",
                             Name = "Smartphone",
-                            Price = 800.00m
+                            Price = 800.00m,
+                            UserId = 1
                         },
                         new
                         {
@@ -120,7 +127,8 @@ namespace Shop.Migrations
                             CategoryId = 2,
                             Description = "تی‌شرت نخی ساده",
                             Name = "T-Shirt",
-                            Price = 20.00m
+                            Price = 20.00m,
+                            UserId = 1
                         },
                         new
                         {
@@ -128,7 +136,8 @@ namespace Shop.Migrations
                             CategoryId = 2,
                             Description = "شلوار جین",
                             Name = "Jeans",
-                            Price = 50.00m
+                            Price = 50.00m,
+                            UserId = 1
                         },
                         new
                         {
@@ -136,7 +145,45 @@ namespace Shop.Migrations
                             CategoryId = 3,
                             Description = "کتاب برنامه‌نویسی",
                             Name = "Programming Book",
-                            Price = 30.00m
+                            Price = 30.00m,
+                            UserId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Shop.Models.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@gmail.com",
+                            Password = "password",
+                            UserName = "Admin"
                         });
                 });
 
@@ -148,10 +195,23 @@ namespace Shop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Shop.Models.Entities.User", "User")
+                        .WithMany("Products")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Shop.Models.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Shop.Models.Entities.User", b =>
                 {
                     b.Navigation("Products");
                 });

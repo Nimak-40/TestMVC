@@ -1,12 +1,16 @@
 ﻿<div class="container px-5 my-5">
-    <form method="post" asp-controller="Category" asp-action="CreateCategory">
+    <form method="post" asp-controller="Category" asp-action="Registering">
         <div class="form-floating mb-3">
-            <input class="form-control" name="name" type="text" placeholder="Category Name" data-sb-validations="" />
-            <label for="name">Category Name</label>
+            <input class="form-control" name="username" type="text" placeholder="Username" data-sb-validations="" />
+            <label for="username">username</label>
         </div>
         <div class="form-floating mb-3">
-            <input class="form-control" name="description" type="text" placeholder="Category Description" data-sb-validations="" />
-            <label for="description">Category Description</label>
+            <input class="form-control" name="email" type="text" placeholder="email" data-sb-validations="" />
+            <label for="email">email</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" name="password" type="text" placeholder="password" data-sb-validations="" />
+            <label for="password">password</label>
         </div>
         <div class="d-grid">
             <button class="btn btn-primary btn-lg " id="submitButton" type="submit">Submit</button>
